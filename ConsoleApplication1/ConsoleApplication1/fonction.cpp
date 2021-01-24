@@ -1,3 +1,4 @@
+// fonction.cpp : Ce fichier contient une fonction.
 #include <iostream> 
 #include <string>
 #include <cmath>    
@@ -6,7 +7,7 @@
 #include <chrono>
 #include <thread>
 #include "header.h"
-#include <stdlib.h>
+#include "stdlib.h"
 using namespace std;
 using namespace std::chrono_literals;
 

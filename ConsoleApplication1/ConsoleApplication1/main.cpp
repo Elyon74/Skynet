@@ -7,17 +7,17 @@
 #include <chrono>   // On charge la bibliotheque chrono qui permet de poser un delai d' attente entre deux ligne de code
 #include <thread>   // On charge la bibliotheque thread qui permet de poser un delai d' attente entre deux ligne de code
 #include "fonction.cpp" // Pour incluer un fichier on utilise "" et non <>
-#include <stdlib.h>
+#include "stdlib.h"
 using namespace std;    // Necessaire pour les commandes
 using namespace std::chrono_literals;   // Necessaire pour les chronos
 int main()
-{   // l'interieur d' une fonction commence toujours avec { on doit signalez le retour de la fonction meme vide exemple return=0; avant de refermer la fonction avec }
+{
     std::cout << " Skynet C++17 !" << std::endl;
     std::cout << " La version est 0.01" << std::endl;
     std::cout << " Lancement du programme ... " << std::endl;
     std::cout << " En cas de probleme de connection veuillez supprimez les fichiers du dossier config " << std::endl;
 
-    int age(0);    // Déclaration variable nombre entier integer ici on met 0 car on va demander l' age on pourrait mettre 29 pour 29 ans
+    int age(0);    // Déclaration variable nombre entier integer
     int amis(0);
     int skynetchoice(0);    //Declaration variable de choix   
     int nbenfant(0);
@@ -38,8 +38,8 @@ int main()
     std::cout << " Nom d' utilisateur : " << std::endl;
     std::getline (std::cin, nomutilisateur);
     std::cout << " Utilisateur : " << nomutilisateur << std::endl;  // On peut ecrire a la suite du fichier des informations sans tout remplacer dans le fichier exemple : ofstream monFlux(nomFichier.c_str(), ios::app);
-    std::string const user("config/user.txt");   // On crée une variable string flux nommer userpass et un fichier userpass.txt
-    ofstream utilisateur(user.c_str());    // On ouvre le fichier flux mtpass que l' on crée , pour une variable string on ajoute .c_str au lieu de .txt
+    std::string const user("config/user.txt");   // On crée une variable string flux nommer user et un fichier user.txt
+    ofstream utilisateur(user.c_str());    // On ouvre le fichier flux que l' on a creer , pour une variable string on ajoute .c_str au lieu de .txt
     if (utilisateur)
     {
         utilisateur << nomutilisateur << std::endl; // On ecrit dans le fichier le nom utilisateur rentrer precedemment pour que l' application le reconnaisse ulterieurement
@@ -267,39 +267,3 @@ int main()
     std::chrono::duration<double, std::milli> elapsed = end - start;
     exit(0);
 }
-// */ est un debut commentaire sur plusieurs lignes a la place de // sur une ligne, fin du commentaire 
-// IMPORTANT On n' utilise jamais d' accent dans un programme c+= de type console.
-// Pour ecrire un fichier on utilise la command ofstream et pour lire un fichier la commande ifstream, l' ecriture se fais avec un std::cout et la lecture avec std::cin
-// Pour manuellement fermer un flux (peu utiliser) on utilise la commande monflux.close();
-// std::cout (necessite dincluer la bibliotheque iostream) permet d' afficher un message dans la console exemple : "AfficherUnTexte" ou " " pour faire un espace
-// std::cout est une entrée de commande
-// std::endl permet de marquer la fin d'une commande
-// ; définis la fin d' une ligne de commande
-// Exemple: std::cout << "Bonjour tout le monde !" << std::endl << "Comment allez-vous ?" << std::endl;
-// std::cin permet de rentrer une information exemple std::cout << " Votre age ? " << std::cin >> referenceage;
-// std::cin.ignore ignore le precedent cin
-// std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n') vide le buffer (avancer)
-// Le signe << est un chevron entre deux action
-// [] permet de declarer une variable tableau exemple : int const nombrenotes(6) doublenotes[nombreNotes]; 
-// && correspond a  ET .    || correspond a OU .   ! correspond a NON . le terme else correspond a sinon
-// Le terme if permet de poser une condition exemple if (resultat >= 5) { std::cout << " la valeur est superieur ou égale a 5 " << std::end; }
-// Combiner des conditions exemple: if (enfant && nbEnfants >= 1) se traduit par si enfant = true et nombre enfant superieur ou egal a 1
-// Le terme while(conditions) { contenue } permet de redemander la condition tant que la condition dans les () n' est pas egale a ce qui est entrer dans la console
-// Le terme do while est similaire sauf que le contenue avant while est lu au moins une fois . exemple : do { std::cout << "Combien d'enfants avez-vous ?" << endl; 
-// std::cin >> nbEnfants; } puis on execute while (nbEnfants < 0); (voir terme while)
-// Le terme for permet de condenser une initialisation ( ex compteur = 0 ) une condition ( ex compteur < 10 ) une interprétation (++compteur)
-// Exemple : for (age = 0 ; age < 10 ; ++age) { contenue dans la condition si respecter ;} Ici on affiche la variable age de 0 a 9 et ajoutant +1 a chaque ligne
-// A noter : On peut declarer une nouvelle variable existante seulement pendant l' utilisation du for exemple : for ( int age (0) ; age <10; ++age)
-// Case : permet de poser une condition exemple : case 1: { contenue } case 2: etc
-// le terme switch() permet un choix de conditions
-// le terme break; permet un arret du test il doit etre attribuer a chaque fin de chaque code case:
-// Le terme default: correspond a la condition par defaut si ni true ni false n' est accompli toujours terminer par un break;
-// Egalement possible exemple : int a(4), b(5); ensuite on demande a ce que a = b; Affectation de la valeur de 'b' à 'a' donc a devient 5
-// Addition de valeur : int a(5), b(8), resultat(0);
-// resultat = a + b; la valeur de sortie est le resultat de a + b elle remplace la valeur resultat de base de 0 utilisable en multiplication division etc !
-// Incrementation : int nombreJoueur = nombreJoueur + 1. decrementation : nombreJoueur = nombreJoueur - 1
-// Incrementation methode 2 : ++nombreJoueur; decrementation : --nombreJoueur;
-// Division : nombre = nombre / 3; division methode 2 : nombre = nombre /= 3;
-// Il existe des raccourcis pour les 5 opérations de base, c'est-à-dire +=, -=, *=, /= et %=
-// Le terme	sqrt() permet deffectuer une racine carrer pour un nombre a virgule exemple 5.16 on ajoute double devant la variable a double chiffre
-// On retrouve d' autre terme : Sinus : sin() Cosinus : cos() tangante : tan() arrondit vers le haut : ceil() arrondit vers le bas : floor() fonctionpuissance : pow();
