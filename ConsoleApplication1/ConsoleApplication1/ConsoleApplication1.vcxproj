@@ -148,8 +148,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="fonction.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="fonction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header.h" />
