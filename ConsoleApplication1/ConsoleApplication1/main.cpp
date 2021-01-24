@@ -44,6 +44,10 @@ int main()
     {
         utilisateur << nomutilisateur << std::endl; // On ecrit dans le fichier le nom utilisateur rentrer precedemment pour que l' application le reconnaisse ulterieurement
         std::cout << " Votre nom d' utilisateur a eter sauvegarder dans un fichier. " << std::endl;
+        utilisateur.seekp(0, ios::end); //On se déplace à la fin du fichier seekp pour un fichier a enregistrer seekg pour un fichier ouvert !
+        int usertaille;
+        usertaille = utilisateur.tellp();   //On récupère la position qui correspond a la taille du fichier !
+        cout << "Taille du fichier : " << usertaille << " kiloctets." << endl;
     }
     else
     {
@@ -68,6 +72,10 @@ int main()
         {
             mtpass << motdepass << std::endl;
             std::cout << " Votre mot de pass a eter enregistrer dans un fichier . " << std::endl;
+            mtpass.seekp(0, ios::end);
+            int passtaille;
+            passtaille = mtpass.tellp();
+            cout << "Taille du fichier : " << passtaille << " kiloctets." << endl;
             skynetpass = true;
         }
         else
@@ -212,6 +220,10 @@ int main()
     {
         userage1 << age << " ans . " << endl;
         std::cout << " Votre age a eter enregistrer dans un fichier . " << std::endl;
+        userage1.seekp(0, ios::end);
+        int agetaille;
+        agetaille = userage1.tellp();
+        cout << "Taille du fichier : " << agetaille << " kiloctets." << endl;
     }
     else
     {
@@ -233,6 +245,10 @@ int main()
     {
         genre1 << malefemale << std::endl;
         std::cout << " Votre sexe a eter sauvegarder dans un fichier. " << std::endl;
+        genre1.seekp(0, ios::end);
+        int genretaille;
+        genretaille = genre1.tellp();
+        cout << "Taille du fichier : " << genretaille << " kiloctets." << endl;
     }
     else
     {
@@ -246,7 +262,7 @@ int main()
         exit(0);
     }
     std::cout << " Je suis un(e) " << malefemale << std::endl;
-    std::cout << " Votre nombre d' amis : " << std::endl;
+    std::cout << " Quel est votre nombre d' amis : " << std::endl;
     std::cin >> amis;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::string const friends("config/userfriend.txt");
@@ -255,6 +271,10 @@ int main()
     {
         friends1 << amis << " amis . " << std::endl;
         std::cout << " Votre nombre d' amis a eter sauvegarder dans un fichier. " << std::endl;
+        friends1.seekp(0, ios::end);
+        int friendstaille;
+        friendstaille = friends1.tellp();
+        cout << "Taille du fichier : " << friendstaille << " kiloctets." << endl;
     }
     else
     {
@@ -285,6 +305,10 @@ int main()
             {
                 children1 << nbenfant << " enfants . " << std::endl;
                 std::cout << " Votre nombre d' enfants a eter sauvegarder dans un fichier. " << std::endl;
+                children1.seekp(0, ios::end);
+                int childrentaille;
+                childrentaille = children1.tellp();
+                cout << "Taille du fichier : " << childrentaille << " kiloctets." << endl;
             }
             else
             {
