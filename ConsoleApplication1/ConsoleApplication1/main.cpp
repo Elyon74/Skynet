@@ -60,7 +60,7 @@ int main()
     std::cin >> motdepass;
     std::cout << " Mot de pass : " << motdepass << " confirmez par oui ou non . "<< std::endl;
     std::cin >> confirmeroui, confirmernon;
-    if (string confirmeroui == Oui)
+    if (string confirmeroui == Oui) // ERREUR ICI
     {
         string const userpass("config/userpass.txt");
         ofstream mtpass(userpass.c_str());
@@ -82,7 +82,7 @@ int main()
             exit(0);
         }
     }
-    if (string confirmernon == Non)
+    if (string confirmernon == Non) // ERREUR ICI
     {
         std::cout << "ERREUR : Impossible de confirmez la sauvegarde du fichier. " << std::endl;
         std::cout << " Fin du programme de simulation Skynet . " << std::endl;
@@ -121,24 +121,71 @@ int main()
         {
         string userline2;   // Contient le mot de pass enregistrer
         mtpass >> userline2;
-        if (motdepass = userline2)
+        if (motdepass = userline2)  // ERREUR ICI
         {
             std::cout << " Connection effectuer, que voulez vous faire ? " << std::endl;
             std::cout << " Je veux consultez mon age taper 1 " << std::endl;
             std::cout << " Je veux consultez mon sexe (homme, femme) taper 2 " << std::endl;
             std::cout << " Je veux consultez mon nombre d' amis taper 3 " << std::endl;
             std::cout << " Je veux onsultez mon nombre d' enfants taper 4 " << std::endl;
+            std::cout << " Quitter le programme taper 5 " << std::endl;
             std::cin >> skynetchoice;
             switch (skynetchoice)
             {
             case 1:
+            {
+                ifstream userage1("config/userage.txt");
+                if (userage1)
+                    {
+                    string userage2; // Contient l' age enregistrer
+                    userage1 >> userage2;
+                    std::cout << " Vous avez " << userage2 << std::endl;
+                    }
+            }
                 break;
             case 2:
+            {
+                ifstream genre1("config/usergenre.txt");
+                if (genre1)
+                {
+                    string genre2; // Contient le sexe enregistrer
+                    genre1 >> genre2;
+                    std::cout << " Vous etes un(e) " << genre2 << std::endl;
+                }
+            }
                 break;
             case 3:
+            {
+                ifstream friends1("config/userfriend.txt");
+                if (friends1)
+                {
+                    string friends2; // Contient le nombres d' amis enregistrer
+                    friends1 >> friends2;
+                    std::cout << " Vous avez " << friends2 << " amis . " << std::endl;
+                }
+            }
                 break;
             case 4:
+            {
+                ifstream children1("config/userchildren.txt");
+                if (children1)
+                {
+                    string children2; // Contient le nombre d' enfant enregistrer
+                    children1 >> children2;
+                    std::cout << " Vous avez " << children2 << std::endl;
+                }
+            }
                 break;
+            case 5:
+            {
+                std::cout << " Fin du programme de simulation Skynet . " << std::endl;
+                std::cout << " Fermeture automatique du programme dans 5 secondes. " << std::flush;
+                auto start = std::chrono::high_resolution_clock::now();
+                std::this_thread::sleep_for(5000ms);
+                auto end = std::chrono::high_resolution_clock::now();
+                std::chrono::duration<double, std::milli> elapsed = end - start;
+                exit(0);
+            }
             default:
                 break;
             }
@@ -233,7 +280,7 @@ int main()
                 std::cout << " Vous n' avez pas d' enfants . " << std::endl;
             }
             std::string const children("config/userchildren.txt");
-            ofstream children1("config/userfriend.txt");
+            ofstream children1("config/userchildren.txt");
             if (children1)
             {
                 children1 << nbenfant << " enfants . " << std::endl;
