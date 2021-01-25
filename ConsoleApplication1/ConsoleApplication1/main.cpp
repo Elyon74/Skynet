@@ -6,14 +6,12 @@
 #include <fstream>  // On charge la bibliotheque fstream qui permet de creer un flux et ecrire dans un fichier
 #include <chrono>   // On charge la bibliotheque chrono qui permet de poser un delai d' attente entre deux ligne de code
 #include <thread>   // On charge la bibliotheque thread qui permet de poser un delai d' attente entre deux ligne de code
-#include "mystere.cpp" // On inclus le fichier cpp du jeux de mot mystere
 #include "stdlib.h" // Pour incluer un fichier on utilise "" et non <>
-using namespace std;    // Necessaire pour les commandes
 using namespace std::chrono_literals;   // Necessaire pour les chronos
 int main()
 {
-    std::cout << " Skynet C++17 !" << std::endl;
-    std::cout << " La version est 0.01" << std::endl;
+    std::cout << " Skynet C++17 ! " << std::endl;
+    std::cout << " La version est 1.13 " << std::endl;
     std::cout << " Lancement du programme ... " << std::endl;
     std::cout << " En cas de probleme de connection veuillez supprimez les fichiers du dossier config . " << std::endl;
 
@@ -30,8 +28,8 @@ int main()
     std::string nomutilisateur("???");   // Déclaration variable string
     std::string malefemale("???");
     std::string motdepass("???");
-    std::string confirmeroui("Oui");
-    std::string confirmernon("Non");
+    std::string confirmeroui("???");
+    std::string confirmernon("???");
 
     if (skynetpass == false)
     {
@@ -39,15 +37,15 @@ int main()
     std::getline (std::cin, nomutilisateur);
     std::cout << " Utilisateur : " << nomutilisateur << std::endl;  // On peut ecrire a la suite du fichier des informations sans tout remplacer dans le fichier exemple : ofstream monFlux(nomFichier.c_str(), ios::app);
     std::string const user("config/user.txt");   // On crée une variable string flux nommer user et un fichier user.txt
-    ofstream utilisateur(user.c_str());    // On ouvre le fichier flux que l' on a creer , pour une variable string on ajoute .c_str au lieu de .txt
+    std::ofstream utilisateur(user.c_str());    // On ouvre le fichier flux que l' on a creer , pour une variable string on ajoute .c_str au lieu de .txt
     if (utilisateur)
     {
         utilisateur << nomutilisateur << std::endl; // On ecrit dans le fichier le nom utilisateur rentrer precedemment pour que l' application le reconnaisse ulterieurement
         std::cout << " Votre nom d' utilisateur a eter sauvegarder dans un fichier . " << std::endl;
-        utilisateur.seekp(0, ios::end); //On se déplace à la fin du fichier seekp pour un fichier a enregistrer seekg pour un fichier ouvert !
+        utilisateur.seekp(0, std::ios::end); //On se déplace à la fin du fichier seekp pour un fichier a enregistrer seekg pour un fichier ouvert !
         int usertaille;
         usertaille = utilisateur.tellp();   //On récupère la position qui correspond a la taille du fichier !
-        cout << "Taille du fichier : " << usertaille << " kiloctets ." << endl;
+        std::cout << "Taille du fichier : " << usertaille << " octets ." << std::endl;
     }
     else
     {
@@ -64,18 +62,18 @@ int main()
     std::cin >> motdepass;
     std::cout << " Mot de pass : " << motdepass << " confirmez par oui ou non . "<< std::endl;
     std::cin >> confirmeroui, confirmernon;
-    if (string confirmeroui == Oui) // ERREUR ICI ON CHERCHE A ECRIRE Oui POUR VALIDER ON NE PEUT PAS PASSER LA BOOLEAN EN TRUE AVEC UN MOT (Oui)
+    if (confirmeroui == "Oui")
     {
-        string const userpass("config/userpass.txt");
-        ofstream mtpass(userpass.c_str());
+        std::string const userpass("config/userpass.txt");
+        std::ofstream mtpass(userpass.c_str());
         if (mtpass)
         {
             mtpass << motdepass << std::endl;
             std::cout << " Votre mot de pass a eter enregistrer dans un fichier . " << std::endl;
-            mtpass.seekp(0, ios::end);
+            mtpass.seekp(0, std::ios::end);
             int passtaille;
             passtaille = mtpass.tellp();
-            cout << "Taille du fichier : " << passtaille << " kiloctets ." << endl;
+            std::cout << "Taille du fichier : " << passtaille << " octets ." << std::endl;
             skynetpass = true;
         }
         else
@@ -90,7 +88,7 @@ int main()
             exit(0);
         }
     }
-    if (string confirmernon == Non)  // ERREUR ICI ON CHERCHE A ECRIRE Non POUR VALIDER ON NE PEUT PAS PASSER LA BOOLEAN EN TRUE AVEC UN MOT (Non)
+    if (confirmernon == "Non")
     {
         std::cout << "ERREUR : Impossible de confirmez la sauvegarde du fichier. " << std::endl;
         std::cout << " Fin du programme de simulation Skynet . " << std::endl;
@@ -104,10 +102,10 @@ int main()
     }
     if (skynetpass == true)
     {
-        ifstream utilisateur("config/user.txt");
+        std::ifstream utilisateur("config/user.txt");
         if (utilisateur)
         {
-            string userline;    // Contient le nom dutilisateur enregistrer
+            std::string userline;    // Contient le nom dutilisateur enregistrer
             utilisateur >> userline;
             std::cout << " Bienvenue " << userline << " . " << std::endl;
         }
@@ -124,19 +122,19 @@ int main()
         }
         std::cout << " Entrez votre mot de pass pour vous connectez : " << std::endl;
         std::cin >> motdepass;
-        ifstream mtpass("config/userpass.txt");
+        std::ifstream mtpass("config/userpass.txt");
         if (mtpass)
         {
-        string userline2;   // Contient le mot de pass enregistrer
+        std::string userline2;   // Contient le mot de pass enregistrer
         mtpass >> userline2;
-        if (motdepass = userline2)  // ERREUR ICI DOIT ETRE CONVERTIT EN BOOLEAN
+        if (motdepass == userline2)
         {
             std::cout << " Connection effectuer, que voulez vous faire ? " << std::endl;
             std::cout << " Je veux consultez mon age taper 1 " << std::endl;
             std::cout << " Je veux consultez mon sexe (homme, femme) taper 2 " << std::endl;
             std::cout << " Je veux consultez mon nombre d' amis taper 3 " << std::endl;
             std::cout << " Je veux onsultez mon nombre d' enfants taper 4 " << std::endl;
-            std::cout << " Jouer au mot mystere taper 5 " << std::endl;
+            std::cout << " Lancer le programme jeux de mot mystere taper 5 " << std::endl;
             std::cout << " Relancer le test mathematique du programme Skynet taper 6" << std::endl;
             std::cout << " Quitter le programme taper 7 " << std::endl;
             std::cin >> skynetchoice;
@@ -146,10 +144,10 @@ int main()
             {
             case 1:
             {
-                ifstream userage1("config/userage.txt");
+                std::ifstream userage1("config/userage.txt");
                 if (userage1)
                 {
-                    string userage2; // Contient l' age enregistrer
+                    std::string userage2; // Contient l' age enregistrer
                     userage1 >> userage2;
                     std::cout << " Vous avez " << userage2 << std::endl;
                 }
@@ -158,10 +156,10 @@ int main()
             break;
             case 2:
             {
-                ifstream genre1("config/usergenre.txt");
+                std::ifstream genre1("config/usergenre.txt");
                 if (genre1)
                 {
-                    string genre2; // Contient le sexe enregistrer
+                    std::string genre2; // Contient le sexe enregistrer
                     genre1 >> genre2;
                     std::cout << " Vous etes un(e) " << genre2 << std::endl;
                 }
@@ -170,10 +168,10 @@ int main()
             break;
             case 3:
             {
-                ifstream friends1("config/userfriend.txt");
+                std::ifstream friends1("config/userfriend.txt");
                 if (friends1)
                 {
-                    string friends2; // Contient le nombres d' amis enregistrer
+                    std::string friends2; // Contient le nombres d' amis enregistrer
                     friends1 >> friends2;
                     std::cout << " Vous avez " << friends2 << " amis . " << std::endl;
                 }
@@ -182,10 +180,10 @@ int main()
             break;
             case 4:
             {
-                ifstream children1("config/userchildren.txt");
+                std::ifstream children1("config/userchildren.txt");
                 if (children1)
                 {
-                    string children2; // Contient le nombre d' enfant enregistrer
+                    std::string children2; // Contient le nombre d' enfant enregistrer
                     children1 >> children2;
                     std::cout << " Vous avez " << children2 << std::endl;
                 }
@@ -252,15 +250,15 @@ int main()
     std::cin >> age;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::string const userage("config/userage.txt");
-    ofstream userage1(userage.c_str());
+    std::ofstream userage1(userage.c_str());
     if (userage1)
     {
-        userage1 << age << " ans . " << endl;
+        userage1 << age << " ans . " << std::endl;
         std::cout << " Votre age a eter enregistrer dans un fichier . " << std::endl;
-        userage1.seekp(0, ios::end);
+        userage1.seekp(0, std::ios::end);
         int agetaille;
         agetaille = userage1.tellp();
-        cout << "Taille du fichier : " << agetaille << " kiloctets ." << endl;
+        std::cout << "Taille du fichier : " << agetaille << " octets ." << std::endl;
     }
     else
     {
@@ -277,15 +275,15 @@ int main()
     std::cout << " Vous etes un Homme ou une Femme ? " << std::endl;
     std::getline (std::cin, malefemale);
     std::string const genre("config/usergenre.txt");
-    ofstream genre1("config/usergenre.txt");
+    std::ofstream genre1("config/usergenre.txt");
     if (genre1)
     {
         genre1 << malefemale << std::endl;
         std::cout << " Votre sexe a eter sauvegarder dans un fichier . " << std::endl;
-        genre1.seekp(0, ios::end);
+        genre1.seekp(0, std::ios::end);
         int genretaille;
         genretaille = genre1.tellp();
-        cout << "Taille du fichier : " << genretaille << " kiloctets." << endl;
+        std::cout << "Taille du fichier : " << genretaille << " octets." << std::endl;
     }
     else
     {
@@ -303,15 +301,15 @@ int main()
     std::cin >> amis;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::string const friends("config/userfriend.txt");
-    ofstream friends1("config/userfriend.txt");
+    std::ofstream friends1("config/userfriend.txt");
     if (friends1)
     {
         friends1 << amis << " amis . " << std::endl;
         std::cout << " Votre nombre d' amis a eter sauvegarder dans un fichier . " << std::endl;
-        friends1.seekp(0, ios::end);
+        friends1.seekp(0, std::ios::end);
         int friendstaille;
         friendstaille = friends1.tellp();
-        cout << "Taille du fichier : " << friendstaille << " kiloctets ." << endl;
+        std::cout << "Taille du fichier : " << friendstaille << " octets ." << std::endl;
     }
     else
     {
@@ -337,15 +335,15 @@ int main()
                 std::cout << " Vous n' avez pas d' enfants . " << std::endl;
             }
             std::string const children("config/userchildren.txt");
-            ofstream children1("config/userchildren.txt");
+            std::ofstream children1("config/userchildren.txt");
             if (children1)
             {
                 children1 << nbenfant << " enfants . " << std::endl;
                 std::cout << " Votre nombre d' enfants a eter sauvegarder dans un fichier . " << std::endl;
-                children1.seekp(0, ios::end);
+                children1.seekp(0, std::ios::end);
                 int childrentaille;
                 childrentaille = children1.tellp();
-                cout << "Taille du fichier : " << childrentaille << " kiloctets ." << endl;
+                std::cout << "Taille du fichier : " << childrentaille << " octets ." << std::endl;
             }
             else
             {
@@ -374,4 +372,5 @@ int main()
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double, std::milli> elapsed = end - start;
     exit(0);
+}
 }
