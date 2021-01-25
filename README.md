@@ -1,3 +1,3 @@
-# Skynet C++17 V 0.01
+# Skynet C++17 V 1.13
 # Console version
  
