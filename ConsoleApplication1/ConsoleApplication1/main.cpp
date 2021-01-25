@@ -6,8 +6,8 @@
 #include <fstream>  // On charge la bibliotheque fstream qui permet de creer un flux et ecrire dans un fichier
 #include <chrono>   // On charge la bibliotheque chrono qui permet de poser un delai d' attente entre deux ligne de code
 #include <thread>   // On charge la bibliotheque thread qui permet de poser un delai d' attente entre deux ligne de code
-#include "fonction.cpp" // Pour incluer un fichier on utilise "" et non <>
-#include "stdlib.h"
+#include "mystere.cpp" // On inclus le fichier cpp du jeux de mot mystere
+#include "stdlib.h" // Pour incluer un fichier on utilise "" et non <>
 using namespace std;    // Necessaire pour les commandes
 using namespace std::chrono_literals;   // Necessaire pour les chronos
 int main()
@@ -15,7 +15,7 @@ int main()
     std::cout << " Skynet C++17 !" << std::endl;
     std::cout << " La version est 0.01" << std::endl;
     std::cout << " Lancement du programme ... " << std::endl;
-    std::cout << " En cas de probleme de connection veuillez supprimez les fichiers du dossier config " << std::endl;
+    std::cout << " En cas de probleme de connection veuillez supprimez les fichiers du dossier config . " << std::endl;
 
     int age(0);    // Déclaration variable nombre entier integer
     int amis(0);
@@ -43,28 +43,28 @@ int main()
     if (utilisateur)
     {
         utilisateur << nomutilisateur << std::endl; // On ecrit dans le fichier le nom utilisateur rentrer precedemment pour que l' application le reconnaisse ulterieurement
-        std::cout << " Votre nom d' utilisateur a eter sauvegarder dans un fichier. " << std::endl;
+        std::cout << " Votre nom d' utilisateur a eter sauvegarder dans un fichier . " << std::endl;
         utilisateur.seekp(0, ios::end); //On se déplace à la fin du fichier seekp pour un fichier a enregistrer seekg pour un fichier ouvert !
         int usertaille;
         usertaille = utilisateur.tellp();   //On récupère la position qui correspond a la taille du fichier !
-        cout << "Taille du fichier : " << usertaille << " kiloctets." << endl;
+        cout << "Taille du fichier : " << usertaille << " kiloctets ." << endl;
     }
     else
     {
         std::cout << "ERREUR : Impossible de sauvegarder le fichier. " << std::endl;
         std::cout << " Fin du programme de simulation Skynet . " << std::endl;
-        std::cout << " Fermeture automatique du programme dans 5 secondes. " << std::flush;
+        std::cout << " Fermeture automatique du programme dans 5 secondes . " << std::flush;
         auto start = std::chrono::high_resolution_clock::now(); // Permet de fermer le programme apres 5 secondes
         std::this_thread::sleep_for(5000ms);
         auto end = std::chrono::high_resolution_clock::now();
         std::chrono::duration<double, std::milli> elapsed = end - start;
         exit(0);
     }
-    std::cout << " Entrez un mot de pass pour vous connectez ulterieurement :" << std::endl;
+    std::cout << " Entrez un mot de pass pour vous connectez ulterieurement : " << std::endl;
     std::cin >> motdepass;
     std::cout << " Mot de pass : " << motdepass << " confirmez par oui ou non . "<< std::endl;
     std::cin >> confirmeroui, confirmernon;
-    if (string confirmeroui == Oui) // ERREUR ICI
+    if (string confirmeroui == Oui) // ERREUR ICI ON CHERCHE A ECRIRE Oui POUR VALIDER ON NE PEUT PAS PASSER LA BOOLEAN EN TRUE AVEC UN MOT (Oui)
     {
         string const userpass("config/userpass.txt");
         ofstream mtpass(userpass.c_str());
@@ -75,14 +75,14 @@ int main()
             mtpass.seekp(0, ios::end);
             int passtaille;
             passtaille = mtpass.tellp();
-            cout << "Taille du fichier : " << passtaille << " kiloctets." << endl;
+            cout << "Taille du fichier : " << passtaille << " kiloctets ." << endl;
             skynetpass = true;
         }
         else
         {
-            std::cout << "ERREUR : Impossible de sauvegarder le fichier. " << std::endl;
+            std::cout << "ERREUR : Impossible de sauvegarder le fichier . " << std::endl;
             std::cout << " Fin du programme de simulation Skynet . " << std::endl;
-            std::cout << " Fermeture automatique du programme dans 5 secondes. " << std::flush;
+            std::cout << " Fermeture automatique du programme dans 5 secondes . " << std::flush;
             auto start = std::chrono::high_resolution_clock::now();
             std::this_thread::sleep_for(5000ms);
             auto end = std::chrono::high_resolution_clock::now();
@@ -90,11 +90,11 @@ int main()
             exit(0);
         }
     }
-    if (string confirmernon == Non) // ERREUR ICI
+    if (string confirmernon == Non)  // ERREUR ICI ON CHERCHE A ECRIRE Non POUR VALIDER ON NE PEUT PAS PASSER LA BOOLEAN EN TRUE AVEC UN MOT (Non)
     {
         std::cout << "ERREUR : Impossible de confirmez la sauvegarde du fichier. " << std::endl;
         std::cout << " Fin du programme de simulation Skynet . " << std::endl;
-        std::cout << " Fermeture automatique du programme dans 5 secondes. " << std::flush;
+        std::cout << " Fermeture automatique du programme dans 5 secondes . " << std::flush;
         auto start = std::chrono::high_resolution_clock::now();
         std::this_thread::sleep_for(5000ms);
         auto end = std::chrono::high_resolution_clock::now();
@@ -113,9 +113,9 @@ int main()
         }
         else
         {
-            std::cout << "ERREUR : Impossible de lire le fichier utilisateur. " << std::endl;
+            std::cout << "ERREUR : Impossible de lire le fichier utilisateur . " << std::endl;
             std::cout << " Fin du programme de simulation Skynet . " << std::endl;
-            std::cout << " Fermeture automatique du programme dans 5 secondes. " << std::flush;
+            std::cout << " Fermeture automatique du programme dans 5 secondes . " << std::flush;
             auto start = std::chrono::high_resolution_clock::now();
             std::this_thread::sleep_for(5000ms);
             auto end = std::chrono::high_resolution_clock::now();
@@ -129,14 +129,15 @@ int main()
         {
         string userline2;   // Contient le mot de pass enregistrer
         mtpass >> userline2;
-        if (motdepass = userline2)  // ERREUR ICI
+        if (motdepass = userline2)  // ERREUR ICI DOIT ETRE CONVERTIT EN BOOLEAN
         {
             std::cout << " Connection effectuer, que voulez vous faire ? " << std::endl;
             std::cout << " Je veux consultez mon age taper 1 " << std::endl;
             std::cout << " Je veux consultez mon sexe (homme, femme) taper 2 " << std::endl;
             std::cout << " Je veux consultez mon nombre d' amis taper 3 " << std::endl;
             std::cout << " Je veux onsultez mon nombre d' enfants taper 4 " << std::endl;
-            std::cout << " Quitter le programme taper 5 " << std::endl;
+            std::cout << " Jouer au mot mystere taper 5 " << std::endl;
+            std::cout << " Quitter le programme taper 6 " << std::endl;
             std::cin >> skynetchoice;
             switch (skynetchoice)
             {
@@ -186,8 +187,12 @@ int main()
                 break;
             case 5:
             {
+                std::cout << " Lancement du jeux de mot mystere . " << std::endl;
+            }
+            case 6:
+            {
                 std::cout << " Fin du programme de simulation Skynet . " << std::endl;
-                std::cout << " Fermeture automatique du programme dans 5 secondes. " << std::flush;
+                std::cout << " Fermeture automatique du programme dans 5 secondes . " << std::flush;
                 auto start = std::chrono::high_resolution_clock::now();
                 std::this_thread::sleep_for(5000ms);
                 auto end = std::chrono::high_resolution_clock::now();
@@ -200,9 +205,9 @@ int main()
         }
         else
         {
-            std::cout << "ERREUR : Mot de pass erroner. " << std::endl;
+            std::cout << "ERREUR : Mot de pass erroner . " << std::endl;
             std::cout << " Fin du programme de simulation Skynet . " << std::endl;
-            std::cout << " Fermeture automatique du programme dans 5 secondes. " << std::flush;
+            std::cout << " Fermeture automatique du programme dans 5 secondes . " << std::flush;
             auto start = std::chrono::high_resolution_clock::now();
             std::this_thread::sleep_for(5000ms);
             auto end = std::chrono::high_resolution_clock::now();
@@ -223,13 +228,13 @@ int main()
         userage1.seekp(0, ios::end);
         int agetaille;
         agetaille = userage1.tellp();
-        cout << "Taille du fichier : " << agetaille << " kiloctets." << endl;
+        cout << "Taille du fichier : " << agetaille << " kiloctets ." << endl;
     }
     else
     {
-        std::cout << "ERREUR : Impossible de sauvegarder le fichier. " << std::endl;
+        std::cout << "ERREUR : Impossible de sauvegarder le fichier . " << std::endl;
         std::cout << " Fin du programme de simulation Skynet . " << std::endl;
-        std::cout << " Fermeture automatique du programme dans 5 secondes. " << std::flush;
+        std::cout << " Fermeture automatique du programme dans 5 secondes . " << std::flush;
         auto start = std::chrono::high_resolution_clock::now();
         std::this_thread::sleep_for(5000ms);
         auto end = std::chrono::high_resolution_clock::now();
@@ -244,7 +249,7 @@ int main()
     if (genre1)
     {
         genre1 << malefemale << std::endl;
-        std::cout << " Votre sexe a eter sauvegarder dans un fichier. " << std::endl;
+        std::cout << " Votre sexe a eter sauvegarder dans un fichier . " << std::endl;
         genre1.seekp(0, ios::end);
         int genretaille;
         genretaille = genre1.tellp();
@@ -252,9 +257,9 @@ int main()
     }
     else
     {
-        std::cout << "ERREUR : Impossible de sauvegarder le fichier. " << std::endl;
+        std::cout << "ERREUR : Impossible de sauvegarder le fichier . " << std::endl;
         std::cout << " Fin du programme de simulation Skynet . " << std::endl;
-        std::cout << " Fermeture automatique du programme dans 5 secondes. " << std::flush;
+        std::cout << " Fermeture automatique du programme dans 5 secondes . " << std::flush;
         auto start = std::chrono::high_resolution_clock::now();
         std::this_thread::sleep_for(5000ms);
         auto end = std::chrono::high_resolution_clock::now();
@@ -270,17 +275,17 @@ int main()
     if (friends1)
     {
         friends1 << amis << " amis . " << std::endl;
-        std::cout << " Votre nombre d' amis a eter sauvegarder dans un fichier. " << std::endl;
+        std::cout << " Votre nombre d' amis a eter sauvegarder dans un fichier . " << std::endl;
         friends1.seekp(0, ios::end);
         int friendstaille;
         friendstaille = friends1.tellp();
-        cout << "Taille du fichier : " << friendstaille << " kiloctets." << endl;
+        cout << "Taille du fichier : " << friendstaille << " kiloctets ." << endl;
     }
     else
     {
-        std::cout << "ERREUR : Impossible de sauvegarder le fichier. " << std::endl;
+        std::cout << "ERREUR : Impossible de sauvegarder le fichier . " << std::endl;
         std::cout << " Fin du programme de simulation Skynet . " << std::endl;
-        std::cout << " Fermeture automatique du programme dans 5 secondes. " << std::flush;
+        std::cout << " Fermeture automatique du programme dans 5 secondes . " << std::flush;
         auto start = std::chrono::high_resolution_clock::now();
         std::this_thread::sleep_for(5000ms);
         auto end = std::chrono::high_resolution_clock::now();
@@ -304,17 +309,17 @@ int main()
             if (children1)
             {
                 children1 << nbenfant << " enfants . " << std::endl;
-                std::cout << " Votre nombre d' enfants a eter sauvegarder dans un fichier. " << std::endl;
+                std::cout << " Votre nombre d' enfants a eter sauvegarder dans un fichier . " << std::endl;
                 children1.seekp(0, ios::end);
                 int childrentaille;
                 childrentaille = children1.tellp();
-                cout << "Taille du fichier : " << childrentaille << " kiloctets." << endl;
+                cout << "Taille du fichier : " << childrentaille << " kiloctets ." << endl;
             }
             else
             {
-                std::cout << "ERREUR : Impossible de sauvegarder le fichier. " << std::endl;
+                std::cout << "ERREUR : Impossible de sauvegarder le fichier . " << std::endl;
                 std::cout << " Fin du programme de simulation Skynet . " << std::endl;
-                std::cout << " Fermeture automatique du programme dans 5 secondes. " << std::flush;
+                std::cout << " Fermeture automatique du programme dans 5 secondes . " << std::flush;
                 auto start = std::chrono::high_resolution_clock::now();
                 std::this_thread::sleep_for(5000ms);
                 auto end = std::chrono::high_resolution_clock::now();
@@ -331,7 +336,7 @@ int main()
     pi = sqrt(pi);
     std::cout << pi << " . " << std::endl;
     std::cout << " Fin du programme de simulation Skynet . " << std::endl;
-    std::cout << " Fermeture automatique du programme dans 5 secondes. " << std::flush;
+    std::cout << " Fermeture automatique du programme dans 5 secondes . " << std::flush;
     auto start = std::chrono::high_resolution_clock::now();
     std::this_thread::sleep_for(5000ms);
     auto end = std::chrono::high_resolution_clock::now();
