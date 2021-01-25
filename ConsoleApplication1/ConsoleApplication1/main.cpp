@@ -137,21 +137,25 @@ int main()
             std::cout << " Je veux consultez mon nombre d' amis taper 3 " << std::endl;
             std::cout << " Je veux onsultez mon nombre d' enfants taper 4 " << std::endl;
             std::cout << " Jouer au mot mystere taper 5 " << std::endl;
-            std::cout << " Quitter le programme taper 6 " << std::endl;
+            std::cout << " Relancer le test mathematique du programme Skynet taper 6" << std::endl;
+            std::cout << " Quitter le programme taper 7 " << std::endl;
             std::cin >> skynetchoice;
+            while (skynetchoice)
+            {
             switch (skynetchoice)
             {
             case 1:
             {
                 ifstream userage1("config/userage.txt");
                 if (userage1)
-                    {
+                {
                     string userage2; // Contient l' age enregistrer
                     userage1 >> userage2;
                     std::cout << " Vous avez " << userage2 << std::endl;
-                    }
-            }
+                }
                 break;
+            }
+            break;
             case 2:
             {
                 ifstream genre1("config/usergenre.txt");
@@ -161,8 +165,9 @@ int main()
                     genre1 >> genre2;
                     std::cout << " Vous etes un(e) " << genre2 << std::endl;
                 }
-            }
                 break;
+            }
+            break;
             case 3:
             {
                 ifstream friends1("config/userfriend.txt");
@@ -172,8 +177,9 @@ int main()
                     friends1 >> friends2;
                     std::cout << " Vous avez " << friends2 << " amis . " << std::endl;
                 }
-            }
                 break;
+            }
+            break;
             case 4:
             {
                 ifstream children1("config/userchildren.txt");
@@ -183,13 +189,28 @@ int main()
                     children1 >> children2;
                     std::cout << " Vous avez " << children2 << std::endl;
                 }
-            }
                 break;
+            }
             case 5:
             {
                 std::cout << " Lancement du jeux de mot mystere . " << std::endl;
+                int mystere();
+                break;
             }
             case 6:
+            {
+                std::cout << " Je vais maintenant effectuer un test mathematique simple : " << std::endl;
+                std::cout << " Quel est la valeur de Pi en mathematique ? " << std::endl;
+                std::cin >> piutilisateur;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << " Vous avez declarez que Pi est egal a : " << piutilisateur << std::endl;
+                std::cout << " La valeur exacte de Pi est de : " << pi << std::endl;
+                std::cout << " La racine carrer de " << pi << " est de : " << std::endl;
+                pi = sqrt(pi);
+                std::cout << pi << " . " << std::endl;
+                break;
+            }
+            case 7:
             {
                 std::cout << " Fin du programme de simulation Skynet . " << std::endl;
                 std::cout << " Fermeture automatique du programme dans 5 secondes . " << std::flush;
@@ -198,10 +219,22 @@ int main()
                 auto end = std::chrono::high_resolution_clock::now();
                 std::chrono::duration<double, std::milli> elapsed = end - start;
                 exit(0);
-            }
-            default:
                 break;
             }
+            default:
+            {
+                std::cout << "ERREUR : Aucun choix definie par l' utilisateur . " << std::endl;
+                std::cout << " Fin du programme de simulation Skynet . " << std::endl;
+                std::cout << " Fermeture automatique du programme dans 5 secondes . " << std::flush;
+                auto start = std::chrono::high_resolution_clock::now();
+                std::this_thread::sleep_for(5000ms);
+                auto end = std::chrono::high_resolution_clock::now();
+                std::chrono::duration<double, std::milli> elapsed = end - start;
+                exit(0);
+                break;
+            }
+            }
+        }
         }
         else
         {
@@ -213,9 +246,8 @@ int main()
             auto end = std::chrono::high_resolution_clock::now();
             std::chrono::duration<double, std::milli> elapsed = end - start;
             exit(0);
-        }
-        }
-    }
+}
+}
     std::cout << nomutilisateur << " , " << " Quel age avez vous ? " << std::endl;
     std::cin >> age;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
