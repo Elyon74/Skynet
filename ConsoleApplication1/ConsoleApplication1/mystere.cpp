@@ -35,14 +35,14 @@ int mystere()
 
     std::srand(time(0)); //Initialisation des nombres aléatoires
 
-    std::cout << "Saisissez un mot" << std::endl;   //1 : On demande de saisir un mot
+    std::cout << " Saisissez un mot" << std::endl;   //1 : On demande de saisir un mot
     std::cin >> motMystere;
 
     motMelange = melangerLettres(motMystere); //2 : On récupère le mot avec les lettres mélangées dans motMelange
 
     do //3 : On demande à l'utilisateur quel est le mot mystère
     {
-        std::cout << std::endl << "Quel est le mot mystere ? " << motMelange << std::endl;
+        std::cout << std::endl << " Quel est le mot mystere ? " << motMelange << std::endl;
         std::cin >> motUtilisateur;
 
         if (motUtilisateur == motMystere)
@@ -68,7 +68,7 @@ int mystere()
             std::this_thread::sleep_for(5000ms);
             auto end = std::chrono::high_resolution_clock::now();
             std::chrono::duration<double, std::milli> elapsed = end - start;
-            exit(0);
+            system("exit");
         }
         else
         {
@@ -78,7 +78,7 @@ int mystere()
             std::this_thread::sleep_for(5000ms);
             auto end = std::chrono::high_resolution_clock::now();
             std::chrono::duration<double, std::milli> elapsed = end - start;
-            exit(0);
+            system("exit");
         }
     }while (motUtilisateur != motMystere);  //On recommence tant qu'il n'a pas trouvé
 }
