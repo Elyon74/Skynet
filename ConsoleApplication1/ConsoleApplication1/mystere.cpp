@@ -1,4 +1,3 @@
-// mystere.cpp : Ce fichier contient une fonction pour jouer au mot mystere
 #include <iostream> 
 #include <string>
 #include <cmath>    
@@ -6,26 +5,20 @@
 #include <fstream>  
 #include <chrono>
 #include <thread>
-#include <ctime>    //  On charge la bibliotheque ctime necessaire au jeux mot mystere
-#include <cstdlib>  //  On charge la bibliotheque cstdlib necessaire au jeux du mot mystere
+#include <ctime>    
+#include <cstdlib>
 #include "Header.h"
-
+// A DEBUGUER RECODER UNE FOIS LA FONCTION CHARGER
 std::string melangerLettres(string mot)
 {
    std::string melange;
    int position(0);
-    //Tant qu'on n'a pas extrait toutes les lettres du mot
     while (mot.size() != 0)
     {
-        //On choisit un numéro de lettre au hasard dans le mot
         position = rand() % mot.size();
-        //On ajoute la lettre dans le mot mélangé
         melange += mot[position];
-        //On retire cette lettre du mot mystère
-        //Pour ne pas la prendre une deuxième fois
         mot.erase(position, 1);
     }
-    //On renvoie le mot mélangé
     return melange;
 }
 
@@ -39,13 +32,12 @@ int mystere()
 
     if (motmystereretry == "Oui")
     {
-    std::srand(time(0)); //Initialisation des nombres aléatoires
+        std::srand(time(0));
 
-    std::cout << " Saisissez un mot" << std::endl;   //1 : On demande de saisir un mot
-    std::cin >> motMystere;
+        std::cout << " Saisissez un mot" << std::endl;
+        std::cin >> motMystere;
 
-    motMelange = melangerLettres(motMystere); //2 : On récupère le mot avec les lettres mélangées dans motMelange
-    //3 : On demande à l'utilisateur quel est le mot mystère
+        motMelange = melangerLettres(motMystere);
         std::cout << std::endl << " Quel est le mot mystere ? " << motMelange << std::endl;
         std::cin >> motUtilisateur;
 
@@ -120,3 +112,4 @@ int mystere()
             }
         }
     }
+}

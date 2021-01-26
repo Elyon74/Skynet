@@ -1,13 +1,13 @@
-// main.cpp : Ce fichier contient la fonction 'main'. L'exécution dun programme commence toujours par main la fonction principale
-#include <iostream> // On charge la bibliotheque input outpout stream pour les entre sortie vers la console
-#include <string>   // On charge la bibliotheque string pour utiliser les variables strings
-#include <cmath>    // On charge la bibliotheque math pour effectuer des calculs complexe
-#include <istream>  // On charge la bibliotheque istream pour entrer deux mots entier
-#include <fstream>  // On charge la bibliotheque fstream qui permet de creer un flux et ecrire dans un fichier
-#include <chrono>   // On charge la bibliotheque chrono qui permet de poser un delai d' attente entre deux ligne de code
-#include <thread>   // On charge la bibliotheque thread qui permet de poser un delai d' attente entre deux ligne de code
-#include "stdlib.h" // Pour incluer un fichier on utilise "" et non <>
-using namespace std::chrono_literals;   // Necessaire pour les chronos
+#include <iostream>
+#include <string>
+#include <cmath>
+#include <istream>
+#include <fstream>
+#include <chrono>
+#include <thread>
+#include "stdlib.h"
+// BUG DE MAUVAIS ENREGISTREMENT DES VARIABLE AGE ETC SI UN ENTIER EST INSCRIT
+using namespace std::chrono_literals;
 int main()
 {
     std::cout << " Skynet C++17 ! " << std::endl;
@@ -15,15 +15,15 @@ int main()
     std::cout << " Lancement du programme ... " << std::endl;
     std::cout << " En cas de probleme de connection veuillez supprimez les fichiers du dossier config . " << std::endl;
 
-    int age(0);    // Déclaration variable nombre entier integer
+    int age(0);
     int amis(0);
-    int skynetchoice(0);    //Declaration variable de choix   
+    int skynetchoice(0);  
     int nbenfant(0);
 
-    double piutilisateur(0.0);  // Déclaration variable a double chiffre
+    double piutilisateur(0.0);
     double pi(3.141592653589793);
 
-    std::string nomutilisateur("Inconnue");   // Déclaration variable string
+    std::string nomutilisateur("Inconnue");
     std::string malefemale("???");
     std::string motdepass("???");
     std::string confirmeroui("???");
@@ -45,7 +45,7 @@ int main()
             std::ifstream utilisateur("config/user.txt");
             if (utilisateur)
             {
-                std::string userline;    // Contient le nom dutilisateur enregistrer
+                std::string userline;
                 utilisateur >> userline;
                 std::cout << " Bienvenue " << userline << " . " << std::endl;
                 skynettuser = "true";
@@ -66,7 +66,7 @@ int main()
             {
                 std::cout << " Entrez votre mot de pass pour vous connectez : " << std::endl;
                 std::cin >> motdepass;
-                std::string userline2;   // Contient le mot de pass enregistrer
+                std::string userline2;
                 mtpass >> userline2;
                 if (motdepass == userline2)
                 {
@@ -92,7 +92,7 @@ int main()
                                 std::ifstream userage1("config/userage.txt");
                                 if (userage1)
                                 {
-                                    std::string userage2; // Contient l' age enregistrer
+                                    std::string userage2;
                                     userage1 >> userage2;
                                     std::cout << " Vous avez " << userage2 << " ans . " << std::endl;
                                 }
@@ -103,7 +103,7 @@ int main()
                                 std::ifstream genre1("config/usergenre.txt");
                                 if (genre1)
                                 {
-                                    std::string genre2; // Contient le sexe enregistrer
+                                    std::string genre2;
                                     genre1 >> genre2;
                                     std::cout << " Vous etes un(e) " << genre2 << " ." << std::endl;
                                 }
@@ -114,7 +114,7 @@ int main()
                                 std::ifstream friends1("config/userfriend.txt");
                                 if (friends1)
                                 {
-                                    std::string friends2; // Contient le nombres d' amis enregistrer
+                                    std::string friends2;
                                     friends1 >> friends2;
                                     std::cout << " Vous avez " << friends2 << " amis . " << std::endl;
                                 }
@@ -125,7 +125,7 @@ int main()
                             std::ifstream children1("config/userchildren.txt");
                             if (children1)
                             {
-                                std::string children2; // Contient le nombre d' enfant enregistrer
+                                std::string children2;
                                 children1 >> children2;
                                 std::cout << " Vous avez " << children2 << " enfants " << std::endl;
                             }
@@ -135,7 +135,7 @@ int main()
                             {
                                 std::cout << " Lancement du jeux de mot mystere . " << std::endl;
                                 std::cout << " ERREUR Programme non coder . " << std::endl;
-                                int mystere();
+                                int mystere();  // BUG NE CHARGE PAS LA FONCTION INCLUSE DANS MYSTERE.CPP
                                 break;
                             }
                             case 6:
@@ -160,7 +160,7 @@ int main()
                                 auto end = std::chrono::high_resolution_clock::now();
                                 std::chrono::duration<double, std::milli> elapsed = end - start;
                                 system("exit");
-                                break; // BUG RELANCE LE SCRIPT AU LIEU DE QUITTER
+                                break; // BUG RELANCE LE MENU CONSOLE AU LIEU DE QUITTER
                             }
                             default:
                             {
@@ -199,11 +199,11 @@ if (skynettuser == "false")
     std::ofstream utilisateur("config/user.txt");
     if (utilisateur)
     {
-        utilisateur << nomutilisateur << std::endl; // On ecrit dans le fichier le nom utilisateur rentrer precedemment pour que l' application le reconnaisse ulterieurement
+        utilisateur << nomutilisateur << std::endl;
         std::cout << " Votre nom d' utilisateur a eter sauvegarder dans un fichier . " << std::endl;
-        utilisateur.seekp(0, std::ios::end); //On se déplace à la fin du fichier seekp pour un fichier a enregistrer seekg pour un fichier ouvert !
+        utilisateur.seekp(0, std::ios::end);
         int usertaille;
-        usertaille = utilisateur.tellp();   //On récupère la position qui correspond a la taille du fichier !
+        usertaille = utilisateur.tellp();
         std::cout << " Taille du fichier : " << usertaille << " octets ." << std::endl;
     }
     else
@@ -211,7 +211,7 @@ if (skynettuser == "false")
         std::cout << " ERREUR : Impossible de sauvegarder le fichier. " << std::endl;
         std::cout << " Fin du programme de simulation Skynet . " << std::endl;
         std::cout << " Fermeture automatique du programme dans 5 secondes . " << std::flush;
-        auto start = std::chrono::high_resolution_clock::now(); // Permet de fermer le programme apres 5 secondes
+        auto start = std::chrono::high_resolution_clock::now();
         std::this_thread::sleep_for(5000ms);
         auto end = std::chrono::high_resolution_clock::now();
         std::chrono::duration<double, std::milli> elapsed = end - start;
@@ -366,8 +366,8 @@ if (skynettlist == "true")
                         childrentaille = children1.tellp();
                         std::cout << " Taille du fichier : " << childrentaille << " octets ." << std::endl;
                         skynett = "true";
-                        std::string const sky("config/sky.txt");   // On crée une variable string flux nommer user et un fichier user.txt
-                        std::ofstream skynet1(sky.c_str());    // On ouvre le fichier flux que l' on a creer , pour une variable string on ajoute .c_str au lieu de .txt
+                        std::string const sky("config/sky.txt");
+                        std::ofstream skynet1(sky.c_str());
                         if (skynet1)
                         {
                             skynet1 << skynett << std::endl;
