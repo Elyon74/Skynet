@@ -12,17 +12,21 @@
 
 std::string melangerLettres(string mot)
 {
-    std::string melange;
-    int position(0);
-
-    while (mot.size() != 0) //Tant qu'on n'a pas extrait toutes les lettres du mot
+   std::string melange;
+   int position(0);
+    //Tant qu'on n'a pas extrait toutes les lettres du mot
+    while (mot.size() != 0)
     {
-        position = rand() % mot.size(); //On choisit un numéro de lettre au hasard dans le mot
-        melange += mot[position];   //On ajoute la lettre dans le mot mélangé
-        mot.erase(position, 1); //On retire cette lettre du mot mystère pour ne pas la prendre une deuxième fois
+        //On choisit un numéro de lettre au hasard dans le mot
+        position = rand() % mot.size();
+        //On ajoute la lettre dans le mot mélangé
+        melange += mot[position];
+        //On retire cette lettre du mot mystère
+        //Pour ne pas la prendre une deuxième fois
+        mot.erase(position, 1);
     }
-
-    return melange; //On renvoie le mot mélangé
+    //On renvoie le mot mélangé
+    return melange;
 }
 
 int mystere()
@@ -30,18 +34,18 @@ int mystere()
 
     std::string confirmeroui("???");
     std::string confirmernon("???");
-
+    std::string motmystereretry("Oui");
     std::string motMystere, motMelange, motUtilisateur;
 
+    if (motmystereretry == "Oui")
+    {
     std::srand(time(0)); //Initialisation des nombres aléatoires
 
     std::cout << " Saisissez un mot" << std::endl;   //1 : On demande de saisir un mot
     std::cin >> motMystere;
 
     motMelange = melangerLettres(motMystere); //2 : On récupère le mot avec les lettres mélangées dans motMelange
-
-    do //3 : On demande à l'utilisateur quel est le mot mystère
-    {
+    //3 : On demande à l'utilisateur quel est le mot mystère
         std::cout << std::endl << " Quel est le mot mystere ? " << motMelange << std::endl;
         std::cin >> motUtilisateur;
 
@@ -55,30 +59,64 @@ int mystere()
                 std::cout << " Bravo ! " << userline << " vous avez trouver le mot mystere ! " << std::endl;
                 std::cout << " Voulez vous relancer le programme mot mystere ? " << std::endl;
                 std::cin >> confirmeroui, confirmernon;
+                if (confirmeroui == "Oui")
+                {
+                    motmystereretry = "Oui";
+                }
+                if (confirmernon == "Non")
+                {
+                    motmystereretry = "Non";
+                    std::cout << " Fin du programme de simulation Skynet . " << std::endl;
+                    std::cout << " Fermeture automatique du programme dans 5 secondes . " << std::flush;
+                    auto start = std::chrono::high_resolution_clock::now();
+                    std::this_thread::sleep_for(5000ms);
+                    auto end = std::chrono::high_resolution_clock::now();
+                    std::chrono::duration<double, std::milli> elapsed = end - start;
+                    system("exit");
+                }
+                else
+                {
+                    motmystereretry = "Non";
+                    std::cout << " Fin du programme de simulation Skynet . " << std::endl;
+                    std::cout << " Fermeture automatique du programme dans 5 secondes . " << std::flush;
+                    auto start = std::chrono::high_resolution_clock::now();
+                    std::this_thread::sleep_for(5000ms);
+                    auto end = std::chrono::high_resolution_clock::now();
+                    std::chrono::duration<double, std::milli> elapsed = end - start;
+                    system("exit");
+                }
+            }
+            else
+            {
+                std::cout << "Ce n'est pas le bon mot !" << std::endl;
+                std::cout << " Voulez vous relancer le programme mot mystere ? " << std::endl;
+                std::cin >> confirmeroui, confirmernon;
+                if (confirmeroui == "Oui")
+                {
+                    motmystereretry = "Oui";
+                }
+                if (confirmernon == "Non")
+                {
+                    motmystereretry = "Non";
+                    std::cout << " Fin du programme de simulation Skynet . " << std::endl;
+                    std::cout << " Fermeture automatique du programme dans 5 secondes . " << std::flush;
+                    auto start = std::chrono::high_resolution_clock::now();
+                    std::this_thread::sleep_for(5000ms);
+                    auto end = std::chrono::high_resolution_clock::now();
+                    std::chrono::duration<double, std::milli> elapsed = end - start;
+                    system("exit");
+                }
+                else
+                {
+                    motmystereretry = "Non";
+                    std::cout << " Fin du programme de simulation Skynet . " << std::endl;
+                    std::cout << " Fermeture automatique du programme dans 5 secondes . " << std::flush;
+                    auto start = std::chrono::high_resolution_clock::now();
+                    std::this_thread::sleep_for(5000ms);
+                    auto end = std::chrono::high_resolution_clock::now();
+                    std::chrono::duration<double, std::milli> elapsed = end - start;
+                    system("exit");
+                }
             }
         }
-        if (confirmeroui == "Oui")
-        {
-        }
-        if (confirmernon == "Non")
-        {
-            std::cout << " Fin du programme de simulation Skynet . " << std::endl;
-            std::cout << " Fermeture automatique du programme dans 5 secondes . " << std::flush;
-            auto start = std::chrono::high_resolution_clock::now();
-            std::this_thread::sleep_for(5000ms);
-            auto end = std::chrono::high_resolution_clock::now();
-            std::chrono::duration<double, std::milli> elapsed = end - start;
-            system("exit");
-        }
-        else
-        {
-            std::cout << " Fin du programme de simulation Skynet . " << std::endl;
-            std::cout << " Fermeture automatique du programme dans 5 secondes . " << std::flush;
-            auto start = std::chrono::high_resolution_clock::now();
-            std::this_thread::sleep_for(5000ms);
-            auto end = std::chrono::high_resolution_clock::now();
-            std::chrono::duration<double, std::milli> elapsed = end - start;
-            system("exit");
-        }
-    }while (motUtilisateur != motMystere);  //On recommence tant qu'il n'a pas trouvé
-}
+    }
